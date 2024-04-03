@@ -1,0 +1,11 @@
+torch
+torchvision
+torchview
+torchinfo
+torchmetrics
+
+mlxtend
+
+graphviz
+matplotlib
+tqdm
