@@ -100,7 +100,6 @@ class MobileNetv1(nn.Module):
         self.fc1 = nn.Linear(int(1024 * alpha), num_classes)
 
     def forward(self, x):
-        x = self.features(x)
-        x = self.avgpool(x)
+        x = self.avgpool(self.features(x))
         x = torch.flatten(x, start_dim=1)
         return self.fc1(x)
