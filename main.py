@@ -62,11 +62,12 @@ def main(args):
     summary(model, (1, 3) + (args["img_size"], args["img_size"]))
 
     # initialize loss, accuracy and optimizer
-    loss_fn = nn.CrossEntropyLoss()
     if len(classes) == 2:
         accuracy_fn = Accuracy(task="binary")
+        loss_fn = nn.BCEWithLogitsLoss()
     else:
         accuracy_fn = Accuracy(task="multiclass", num_classes=len(classes))
+        loss_fn = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), 0.001)
 
     # initialize trainer. It will make DataLoaders for train and test
