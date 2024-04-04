@@ -58,16 +58,16 @@ def main(args):
     open(os.path.join(args["project_path"], "classes.txt"), "w").write("\n".join(classes))
 
     # initialize our model
-    model = get_model(args["model"], args["alpha"], args["reps"], args["bottleneck"], len(classes))
+    model = get_model(args["model"], args["alpha"], args["reps"], args["bottleneck"], len(classes)).to(device)
     summary(model, (1, 3) + (args["img_size"], args["img_size"]))
 
     # initialize loss, accuracy and optimizer
     if len(classes) == 2:
-        accuracy_fn = Accuracy(task="binary")
-        loss_fn = nn.BCEWithLogitsLoss()
+        accuracy_fn = Accuracy(task="binary").to(device)
+        loss_fn = nn.BCEWithLogitsLoss().to(device)
     else:
-        accuracy_fn = Accuracy(task="multiclass", num_classes=len(classes))
-        loss_fn = nn.CrossEntropyLoss()
+        accuracy_fn = Accuracy(task="multiclass", num_classes=len(classes)).to(device)
+        loss_fn = nn.CrossEntropyLoss().to(device)
     optimizer = optim.Adam(model.parameters(), 0.001)
 
     # initialize trainer. It will make DataLoaders for train and test
