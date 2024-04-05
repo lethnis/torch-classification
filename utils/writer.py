@@ -50,7 +50,6 @@ class Writer:
                 plt.xlabel("epoch")
                 plt.legend()
                 plt.grid()
-                plt.xticks(range(len(self.history.get("train_" + key))))
                 plt.tight_layout()
                 plt.savefig(os.path.join(self.project_path, key + ".png"))
                 plt.close()
