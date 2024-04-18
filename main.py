@@ -128,7 +128,7 @@ Optional args:
         Needed to expand diversity of the data, prevent overfitting, increase
         generalization capability of the model.
         Available options are: 'no', 'soft', 'strong'.
-        Example: 'augs='no'. Defaults to 'strong'.
+        Example: 'augs=no'. Defaults to 'strong'.
         
     name (str): name of the project, where training info will be saved.
         Example: 'name=experiment1'. Defaults to the name of dataset."""
