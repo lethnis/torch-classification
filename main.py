@@ -59,7 +59,7 @@ def main(args):
 
     # initialize our model
     model = get_model(args["model"], args["alpha"], args["reps"], args["bottleneck"], len(classes)).to(device)
-    summary(model, (1, 3) + (args["img_size"], args["img_size"]))
+    summary(model, (args["batch"], 3) + (args["img_size"], args["img_size"]))
 
     # initialize loss, accuracy and optimizer
     if len(classes) == 2:
