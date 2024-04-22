@@ -4,6 +4,7 @@ from pathlib import Path
 
 from PIL import Image
 from matplotlib import pyplot as plt
+import numpy as np
 
 import torch
 from torchvision import transforms
@@ -25,19 +26,39 @@ def main():
         ]
     )
 
-    for image_path in images_paths:
-        # load image
-        image = Image.open(image_path)
-        # transform and add batch dimension
-        transformed = transform(image).unsqueeze(0)
-        # predict and get the highest score
-        pred = classes[int(model(transformed).argmax(dim=1)[0])]
+    model.eval()
+    with torch.inference_mode():
+        for image_path in images_paths:
+            # load image
+            image = Image.open(image_path)
+            # transform and add batch dimension
+            transformed = transform(image).unsqueeze(0)
+            # predict and get the highest score
 
-        # save image with class name
-        plt.imshow(image)
-        plt.title(pred)
-        plt.axis("off")
-        plt.savefig(f"predictions/{Path(image_path).name}")
+            probs = torch.softmax(model(transformed), dim=1)
+            max_idx = int(probs.argmax(dim=1)[0])
+            pred_class = classes[max_idx]
+
+            plt.figure(figsize=(10, 5))
+
+            # add image to the plot
+            plt.subplot(1, 2, 1)
+            plt.imshow(image)
+            plt.title(Path(image_path).name)
+            plt.axis("off")
+
+            # add probabilities plot
+            plt.subplot(1, 2, 2)
+            # all bars colors will be gray but top class will be blue
+            colors = ["grey" for i in probs[0]]
+            colors[max_idx] = "blue"
+            plt.bar(classes.values(), np.asarray(probs[0]), color=colors)
+            plt.title(f"Prediced class = {pred_class}")
+            plt.xlabel("classes")
+            plt.ylabel("probabilities")
+            plt.tight_layout()
+            plt.xticks(rotation=-45)
+            plt.savefig(f"predictions/{Path(image_path).name}")
 
 
 def parse_args():
