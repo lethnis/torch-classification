@@ -2,6 +2,7 @@ import os
 import sys
 import torch
 from torch import optim, nn
+from torch.utils.tensorboard.writer import SummaryWriter
 from torchvision import transforms
 from torchmetrics import Accuracy
 from torchinfo import summary
@@ -22,6 +23,9 @@ def main(args):
     writer = Writer(project_name)
     args["project_path"] = writer.project_path
     print(f"Saving project to the {writer.project_path}")
+
+    # create tensorboard summary writer for saving plots
+    tb_writer = SummaryWriter(args["project_path"])
 
     # save args as yaml file to the project path
     with open(os.path.join(args["project_path"], "args.yaml"), "w") as f:
@@ -74,7 +78,7 @@ def main(args):
     trainer = Trainer(train_ds, val_ds, test_ds, args["batch"], device)
 
     # train the model. Additionally trainer will plot conf matrix and writer will record progress
-    trainer.train(model, loss_fn, optimizer, accuracy_fn, writer, args["epochs"])
+    trainer.train(model, loss_fn, optimizer, accuracy_fn, writer, args["epochs"], tb_writer)
 
 
 def parse_args() -> dict:

@@ -56,6 +56,6 @@
 # TODO
 
 -   [x] save best model
--   [ ] add tensorboard support
+-   [x] add tensorboard support
 -   [x] add args.yaml file to store all parameters
 -   [ ] add resume training from saved model
