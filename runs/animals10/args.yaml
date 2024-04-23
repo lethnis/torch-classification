@@ -1,0 +1,11 @@
+data: ../datasets/animals10/
+model: densenet
+alpha: 1.0
+reps: [2, 4, 8]
+bottleneck: False
+batch: 32
+epochs: 200
+img_size: 128
+augs: strong
+name: None
+project_path: runs/animals10
