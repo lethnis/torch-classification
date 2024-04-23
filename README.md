@@ -1,9 +1,9 @@
-# torch-classification
+# Классификация изображений с нуля на PyTorch
 
-Пример классификации изображений с моделями с нуля на PyTorch
-Ссылка на датасет:
+Пример классификации изображений с моделями с нуля на PyTorch. [Датасет](https://www.kaggle.com/datasets/alessiocorrado99/animals10) взят с сайта Kaggle.
 
 # Использование
+### Обучение
 
 1. Подготовить виртуальную среду. Использовался `python 3.11.8`
 2. Установить зависимости. `pip install -r requirements.txt`
@@ -39,19 +39,48 @@
     <code>python main.py path/to/dataset/ densenet reps=[2,4,8] bottleneck=True augs='soft'</code>
 </details>
 
-# Выводы
+### Предсказание
+Выполнить `python predict.py path/to/best.pt path/to/images`
 
-Достигнута точность: Как можно её улучшить:
+# Результаты обучения
+Результаты обучения сохраняются в папку `runs/` со следующей структурой:
+<img src=https://github.com/lethnis/torch-classification/assets/88483002/071bf21a-6a6e-43d4-a6d0-df1d150638f1>
+
+### Графики обучения:
+<table>
+   <tr>
+      <td><img src=runs/animals10/loss.png width=300></td>
+      <td><img src=runs/animals10/accuracy.png width=300></td>
+      <td><img src=runs/animals10/conf_norm.png width=300></td>
+   </tr>
+</table>
+
+Достигнута точность ~80%: Как можно её улучшить:
 
 -   экспериментировать с аугментацией
 -   экспериментировать с гиперпараметрами(количество эпох, размер батчей, размер изображений и т.д.)
 -   собрать больше данных
--   использовать больше слоёв в модели
--   Добавить слои регуляризации
 -   Использовать другие архитектуры (например, ViT, ResNet, EfficientNet)
 -   использовать fine-tuning и feature extraction предобученных моделей
 
-Дообучение предобученных моделей здесь. Достигнута точность
+### Примеры предсказания модели
+<table>
+   <tr>
+      <td><img src=predictions/chims.jpg width=800></td>
+   </tr>
+   <tr>
+      <td><img src=predictions/chiro.jpg width=800></td>
+   </tr>
+   <tr>
+      <td><img src=predictions/crunchycat.jpg width=800></td>
+   </tr>
+   <tr>
+      <td><img src=predictions/maxwell.jpg width=800></td>
+   </tr>
+   <tr>
+      <td><img src=predictions/nelson.jpg width=800></td>
+   </tr>
+</table>
 
 # TODO
 
