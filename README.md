@@ -43,7 +43,7 @@
 Выполнить `python predict.py path/to/best.pt path/to/images`
 
 # Результаты обучения
-Результаты обучения сохраняются в папку `runs/` со следующей структурой:
+Результаты обучения сохраняются в папку `runs/project_name` со следующей структурой:
 <img src=https://github.com/lethnis/torch-classification/assets/88483002/071bf21a-6a6e-43d4-a6d0-df1d150638f1>
 
 ### Графики обучения:
