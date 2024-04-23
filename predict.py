@@ -5,6 +5,7 @@ from pathlib import Path
 from PIL import Image
 from matplotlib import pyplot as plt
 import numpy as np
+from tqdm import tqdm
 
 import torch
 from torchvision import transforms
@@ -28,7 +29,7 @@ def main():
 
     model.eval()
     with torch.inference_mode():
-        for image_path in images_paths:
+        for image_path in tqdm(images_paths):
             # load image
             image = Image.open(image_path)
             # transform and add batch dimension
@@ -76,7 +77,7 @@ def parse_args():
     images_paths = get_paths(args[1])
 
     # load model
-    model = torch.load(model_path)
+    model = torch.load(model_path, map_location=torch.device("cpu"))
 
     # from model path extract classes and training args files
     classes_path = model_path.parent / "classes.txt"
