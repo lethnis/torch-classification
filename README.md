@@ -1,6 +1,7 @@
 # Классификация изображений с нуля на PyTorch
 
-Пример классификации изображений с моделями с нуля на PyTorch. [Датасет](https://www.kaggle.com/datasets/alessiocorrado99/animals10) взят с сайта Kaggle.
+Пример классификации изображений с моделями с нуля на PyTorch. Датасет [Animals-10](https://www.kaggle.com/datasets/alessiocorrado99/animals10) взят с сайта Kaggle.  
+Дообучение готовых моделей [здесь](https://github.com/lethnis/torch-image-classification-finetuning).
 
 # Использование
 ### Обучение
